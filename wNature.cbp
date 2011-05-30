@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="wNature" />
+		<Option pch_mode="2" />
+		<Option compiler="dmd" />
+		<Build>
+			<Target title="Release">
+				<Option output="wNature" prefix_auto="1" extension_auto="1" />
+				<Option object_output="/mnt/home/hackeridze/programs/wNature/.objs" />
+				<Option type="1" />
+				<Option compiler="dmd" />
+				<Compiler>
+					<Add option="-O" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="color.d" />
+		<Unit filename="commands.d" />
+		<Unit filename="handlers.d" />
+		<Unit filename="hero.d" />
+		<Unit filename="items.d" />
+		<Unit filename="main.d" />
+		<Unit filename="map.d" />
+		<Unit filename="mobs.d" />
+		<Unit filename="random.d" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
