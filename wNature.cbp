@@ -16,15 +16,15 @@
 				</Compiler>
 			</Target>
 		</Build>
-		<Unit filename="color.d" />
-		<Unit filename="commands.d" />
-		<Unit filename="handlers.d" />
-		<Unit filename="hero.d" />
-		<Unit filename="items.d" />
-		<Unit filename="main.d" />
-		<Unit filename="map.d" />
-		<Unit filename="mobs.d" />
-		<Unit filename="random.d" />
+		<Unit filename="src/color.d" />
+		<Unit filename="src/commands.d" />
+		<Unit filename="src/handlers.d" />
+		<Unit filename="src/hero.d" />
+		<Unit filename="src/items.d" />
+		<Unit filename="src/main.d" />
+		<Unit filename="src/map.d" />
+		<Unit filename="src/mobs.d" />
+		<Unit filename="src/random.d" />
 		<Extensions>
 			<code_completion />
 			<debugger />

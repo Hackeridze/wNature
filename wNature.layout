@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="src/color.d" open="1" top="0" tabpos="2">
+		<Cursor position="1543" topLine="0" />
+	</File>
+	<File name="src/commands.d" open="1" top="0" tabpos="3">
+		<Cursor position="1544" topLine="0" />
+	</File>
+	<File name="src/handlers.d" open="1" top="0" tabpos="4">
+		<Cursor position="1544" topLine="0" />
+	</File>
+	<File name="src/hero.d" open="1" top="0" tabpos="5">
+		<Cursor position="1544" topLine="0" />
+	</File>
+	<File name="src/items.d" open="1" top="0" tabpos="6">
+		<Cursor position="1543" topLine="0" />
+	</File>
+	<File name="src/main.d" open="1" top="0" tabpos="1">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="src/map.d" open="1" top="0" tabpos="7">
+		<Cursor position="1544" topLine="0" />
+	</File>
+	<File name="src/mobs.d" open="1" top="0" tabpos="8">
+		<Cursor position="1544" topLine="0" />
+	</File>
+	<File name="src/random.d" open="1" top="1" tabpos="9">
+		<Cursor position="1544" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>
