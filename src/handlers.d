@@ -36,7 +36,9 @@ import commands;
 import std.stdio;
 import std.process;
 
-
+/**
+* Hero's coords handler, makes battles, opening territories etc.
+*/
 void coordHandler() {
 
     exploration();
@@ -57,10 +59,12 @@ void coordHandler() {
         }
     }
 }
-
+/**
+* Battle-func
+*/
 string battle(Mob withMob) {
     printHeroInfo();
-    writeln('\n',withMob.name," напал на вас!\n\r\tЧто будем делать?");
+    writeln('\n',withMob.name," attack you!\n\r\tWhat shall we do?");
 
     for (;;) {
         string command = "Unique command";
@@ -82,7 +86,9 @@ string battle(Mob withMob) {
 
 
 
-
+/**
+* Func, for opening territories
+*/
 void exploration() {
     int x = hero.hero.coord.x; /// column
     int y = hero.hero.coord.y; /// row

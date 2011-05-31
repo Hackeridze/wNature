@@ -33,33 +33,33 @@ import color;
 import hero;
 import handlers;
 
-static immutable MAPSIZE = 150; /// Размер карты MAPSIZE*MAPSIZE
-immutable MINI = 4;/// Кол-во клеток от героя до конца минимапы
+static immutable MAPSIZE = 150; /// Size of map MAPSIZE*MAPSIZE
+immutable MINI = 4;/// It's hard to explain, MINI -- for mini map =)
 
 /**
-* Структура каждой ячейки карты
+* Map cell struct
 */
 struct MapCell {
-    string localityType; /// Бывает bank jungle mountains plain desert water shoal forest
-    bool open = false; /// Открыта ли территория? По умолчанию закрыта
+    string localityType; /// May be bank jungle mountains plain desert water shoal forest
+    bool open = false; /// Does its escaped? No by default
 }
 /**
-* Структура каждой ячейки карты, взятой из файла
+* Struct of map cells from the file
 */
 struct fileMapCell {
-    char localityType; /// Бывает bank(B) jungle(J) mountains(M) plain(P) desert(D) water(W) shoal(S)
+    char localityType; /// May be bank(B) jungle(J) mountains(M) plain(P) desert(D) water(W) shoal(S)
 }
 
-static MapCell[MAPSIZE][MAPSIZE] worldMap; /// Всемирная карта
-fileMapCell[MAPSIZE][MAPSIZE] fromFile; /// Карта, взятая из файла
+static MapCell[MAPSIZE][MAPSIZE] worldMap; /// World map
+fileMapCell[MAPSIZE][MAPSIZE] fromFile; /// From-file map
 
 void mapInitializator() {
 
-    write("Загружаем файл карты...");
+    write("Loading map-file...");
     getMapFromFile();
     writeln(LIGHTGREEN, " OK", DEFAULT);
 
-    write("Постройка карты...");
+    write("Building map...");
     for (int column = 0; column < MAPSIZE; ++column) {
         for ( int row = 0; row < MAPSIZE; ++row) {
 
@@ -83,11 +83,12 @@ void mapInitializator() {
     }
     writeln(LIGHTGREEN, " OK", DEFAULT);
 
-    ///write("Присваивание имен...");
-    ///localityNaming();
-    ///writeln(LIGHTGREEN, " OK", DEFAULT);
+    //write("Присваивание имен...");
+    //localityNaming();
+    //writeln(LIGHTGREEN, " OK", DEFAULT);
 }
 
+/// Print mini-map
 void printMapMini() {
     writeln("\n\n\n\n");
     write(DEFAULT);
@@ -163,7 +164,7 @@ void printMapMini() {
     write(DEFAULT);
 }
 
-
+/// Print all map, its fucking large!
 void printMapAll() {
 
     int column, row;
@@ -249,7 +250,7 @@ void printMapAll() {
 }
 
 
-
+/// Print a part of the map
 void printMapPart(ushort how) {
 
     writeln(DEFAULT);
@@ -372,7 +373,7 @@ void printMapRow(ref int ttt, int row) {
     } else return;
 }
 
-
+/// Getting map from the 'world.map' file
 void getMapFromFile() {
 
     FILE *worldMapFile;

@@ -32,73 +32,84 @@ import map;
 import hero;
 import color;
 
+/**
+* Command processor
+*/
 bool processCommand(string command) {
 
-    if (command == "выход\n") return false;
+    if (command == "exit\n") return false;
 
-    else if (command == "карта\n") printMapPart(70);
+    else if (command == "map\n") printMapPart(70);
 
-    else if (command == "с\n") hero.hero.goUp();
-    else if (command == "ю\n") hero.hero.goDown();
-    else if (command == "в\n") hero.hero.goRight();
-    else if (command == "з\n") hero.hero.goLeft();
+    else if (command == "n\n") hero.hero.goUp();
+    else if (command == "s\n") hero.hero.goDown();
+    else if (command == "e\n") hero.hero.goRight();
+    else if (command == "w\n") hero.hero.goLeft();
 
-    else if (command == "го с\n") heroGoTo("up");
-    else if (command == "го ю\n") heroGoTo("down");
-    else if (command == "го в\n") heroGoTo("right");
-    else if (command == "го з\n") heroGoTo("left");
+    else if (command == "go n\n") heroGoTo("up");
+    else if (command == "go s\n") heroGoTo("down");
+    else if (command == "go e\n") heroGoTo("right");
+    else if (command == "go w\n") heroGoTo("left");
 
-    else if (command == "инфо\n") printHeroInfo();
+    else if (command == "info\n") printHeroInfo();
 
-    else if (command == "помощь\n") printCommands();
+    else if (command == "help\n") printCommands();
 
     return true;
 }
 
+/**
+* Print all commands
+*/
 void printCommands() {
     write(RED);
-    writeln("\n Доступные команды:");
+    writeln("\n Commands:");
     write(LIGHTRED);
-    writeln("\tвыход -- выход, что логично, более чем");
+    writeln("\texit -- RIGHT exit, do not use Ctrl+C");
 
-    writeln("\tкарта - карта, вся карта");
+    writeln("\tmap -- map, a part of");
 
-    writeln("\tс -- идти на север");
-    writeln("\tю -- идти на юг");
-    writeln("\tв -- идти на восток");
-    writeln("\tз -- идти на запад");
+    writeln("\tn -- go to the north");
+    writeln("\ts -- go to the south");
+    writeln("\te -- go to the east");
+    writeln("\tw -- go to the west");
 
-    writeln("\tго с -- идти на север, можно долго");
-    writeln("\tго ю -- идти на юг, можно долго");
-    writeln("\tго в -- идти на восток, можно долго");
-    writeln("\tго з -- идти на запад, можно долго");
+    writeln("\tgo n -- go to the north, some times, stops by death");
+    writeln("\tgo s -- go to the south, some times, stops by death");
+    writeln("\tgo e -- go to the east, some times, stops by death");
+    writeln("\tgo w -- go to the west, some times, stops by death");
 
-    writeln("\tинфо -- инфо о герое, на данный момент");
+    writeln("\tinfo -- current info about your hero");
 
     write(DEFAULT);
 }
 
-
+/**
+* Battle commands processor
+*/
 bool processBattleCommand(string command) {
 
-    if (command == "бежать\n") return false;
+    if (command == "run\n") return false;
 
-    else if (command == "карта\n") printMapPart(70);
+    else if (command == "map\n") printMapPart(70);
 
-    else if (command == "инфо\n") printHeroInfo();
+    else if (command == "info\n") printHeroInfo();
 
-    else if (command == "помощь\n") printBattleCommands();
+    else if (command == "help\n") printBattleCommands();
 
     return true;
 }
+/**
+* Print all battle commands
+*/
 void printBattleCommands() {
     write(RED);
-    writeln("\n Доступные команды:");
+    writeln("\n Commands:");
     write(LIGHTRED);
-    writeln("\tбежать -- попытаться стоит...");
+    writeln("\trun -- you can try to run away from the mob");
 
 
-    writeln("\tинфо -- инфо о герое, на данный момент");
+    writeln("\tinfo -- current info about your hero");
 
     write(DEFAULT);
 }

@@ -40,7 +40,7 @@ struct Mob {
     string habitat;
 
 
-    /// Функция возвращает рейтинг, да
+    /// Returns the rating
     float rating() {
         float rating = (((health*2)*38)/75 + ((attackPower + spellPower)*67)/81);
         rating /= 13.2546798511277;
@@ -114,20 +114,20 @@ Mob get(const ulong id) {
 immutable NUMBER_OF_MOBS = 10; /// ID последнего + 1
 
 
-static Mob boar() { /// "boar()" -- название ф-ции
-    string name = "Кабан"; /// Имя
-    uint health = 7 + randomInt(3);/// Значит, что будет 8-10 ХП, рандом инт возвращает от 1 до max(тут равно 3)
-    uint attackPower = 3; /// Сила атаки
-    uint spellPower = 0; /// СПД
+static Mob boar() {
+    string name = "Boar";
+    uint health = 7 + randomInt(3);
+    uint attackPower = 3;
+    uint spellPower = 0;
     ulong id = 0; /// ID
-    string habitat = "forest";/// Среда обитания, бывает bank jungle mountains plain desert water shoal forest
+    string habitat = "forest";/// Habitat, may be bank jungle mountains plain desert water shoal forest
 
     auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
     return mob;
 }
 
 static Mob wolf() {
-    string name = "Волк";
+    string name = "Wolf";
     uint health = 5 + randomInt(4);
     uint attackPower = 6;
     uint spellPower = 0;
@@ -139,7 +139,7 @@ static Mob wolf() {
 }
 
 static Mob bear() {
-    string name = "Медведь";
+    string name = "Bear";
     uint health = 8 + randomInt(4);
     uint attackPower = 9;
     uint spellPower = 0;
@@ -151,7 +151,7 @@ static Mob bear() {
 }
 
 static Mob crocodile() {
-    string name = "Крокодил";
+    string name = "Crocodile";
     uint health = 7 + randomInt(4);
     uint attackPower = 7;
     uint spellPower = 0;
@@ -163,7 +163,7 @@ static Mob crocodile() {
 }
 
 static Mob rat() {
-    string name = "Крыса";
+    string name = "Rat";
     uint health = 2 + randomInt(2);
     uint attackPower = 2;
     uint spellPower = 0;
@@ -175,7 +175,7 @@ static Mob rat() {
 }
 
 static Mob tiger() {
-    string name = "Тигр";
+    string name = "Tiger";
     uint health = 8 + randomInt(3);
     uint attackPower = 10;
     uint spellPower = 0;
@@ -187,7 +187,7 @@ static Mob tiger() {
 }
 
 static Mob spider() {
-    string name = "Паук";
+    string name = "Spider";
     uint health = 1 + randomInt(2);
     uint attackPower = 1;
     uint spellPower = 0;
@@ -199,7 +199,7 @@ static Mob spider() {
 }
 
 static Mob elephant() {
-    string name = "Слон";
+    string name = "Elephant";
     uint health = 13 + randomInt(5);
     uint attackPower = 15;
     uint spellPower = 0;
@@ -211,7 +211,7 @@ static Mob elephant() {
 }
 
 static Mob wolverine() {
-    string name = "Росомаха";
+    string name = "Wolverine";
     uint health = 7 + randomInt(3);
     uint attackPower = 11;
     uint spellPower = 0;
@@ -223,7 +223,7 @@ static Mob wolverine() {
 }
 
 static Mob crucian() {
-    string name = "Карась";
+    string name = "Crucian";
     uint health = 0 + randomInt(2);
     uint attackPower = 1;
     uint spellPower = 0;

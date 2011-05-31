@@ -33,16 +33,16 @@ import random;
 import color;
 import handlers;
 
-static char[11] PlayerNickName = '\n'; /// Ник игрока, Максимум 10 символов
+static char[11] PlayerNickName = '\n'; /// Player's nickname, 10 chars maximum long
 immutable STD_HEALTH = 20;
 immutable STD_MANA = 20;
-immutable STD_SPELL_POWER = 2; /// ДЕЛАТЬ ВСЕГДА КРАТНЫМ ДВУМ
-immutable STD_ATTACK_POWER = 2; /// ДЕЛАТЬ ВСЕГДА КРАТНЫМ ДВУМ
+immutable STD_SPELL_POWER = 2; /// Have always done a multiple of two
+immutable STD_ATTACK_POWER = 2; /// Have always done a multiple of two
 immutable STD_FORTUNE = 0;
 immutable STD_REDUCTION = 0;
 immutable STD_CRIT_STRIKE_RATE = 0;
 
-static immutable START_COORD = Coord(45, 15); /// Начальные коордлинаты героя, х = 0 и у = 0
+static immutable START_COORD = Coord(45, 15); /// Start hero coordinates, х = 45 и у = 15
 
 /// Координаты
 struct Coord {
@@ -56,39 +56,39 @@ struct Coord {
 
 
 /**
-* Герой
+* Hero
 */
 struct Hero {
-    char[11] name; /// Имя
-    uint health; /// Здоровье
-    uint healthNow;
-    uint mana; /// Мана
-    uint manaNow;
-    uint attackPower; /// Сила атаки
-    uint spellPower; /// Сила заклинаний
-    uint damageReduction; /// Блокировка урона
-    uint fortune; /// Удача
-    uint critStrikeRate; /// Рейтинг критического удара
+    char[11] name; /// Name
+    uint health; /// Health, maximum
+    uint healthNow; /// Health, now
+    uint mana; /// Mana, maximum
+    uint manaNow; /// Mana, now
+    uint attackPower; /// Attack power
+    uint spellPower; /// Spell power
+    uint damageReduction; /// Damage reduction
+    uint fortune; /// fortune
+    uint critStrikeRate; /// Critical strike rating
 
-    uint armor = 0; /// Броня
+    uint armor = 0; /// Armor
 
-    string[32] inventory; /// Инвентарь
+    string[32] inventory; /// Inventory
 
-    Coord coord = START_COORD;
+    Coord coord = START_COORD; /// initialize hero coords by START_COORDS
 
     void die() {
         if (this.healthNow <= 0) {
-            writeln("Ты помер... Пусть ",heroLocalityType()," теюе будет какашкой!");
+            writeln("You die... Let ",heroLocalityType()," be a piece of shit for you!");
         }
     }
 
-    /// Функция возвращает рейтинг, да
+    /// Returns rating. FUCK! WTF?
     float rating() {
         float rating = (((this.health + this.mana)*38)/75 + ((this.attackPower + this.spellPower)*67)/81);
         rating /= 13.2546798511277;
         return rating;
     }
-    /// Функция хождения вверх
+    /// Up going func
     bool goUp() {
         if ((this.coord.y - 1) !< 0) this.coord.y--;
         else {  writeln(RED, "НИЗЯ, БАШКОЙ ДУМАЙ! ПРИДЕЛИ КАРТЫ! ЕТА ПЛОХА!", DEFAULT);
@@ -97,7 +97,7 @@ struct Hero {
         coordHandler();
         return true;
     }
-    /// Функция хождения вниз
+    /// Down  going func
     bool goDown() {
         if ((this.coord.y + 1) !> MAPSIZE - 1) this.coord.y++;
         else {writeln(RED, "НИЗЯ, БАШКОЙ ДУМАЙ! ПРИДЕЛИ КАРТЫ! ЕТА ПЛОХА!", DEFAULT);
@@ -106,7 +106,7 @@ struct Hero {
         coordHandler();
         return true;
     }
-    /// Функция хождения влево
+    /// Left going func
     bool goLeft() {
         if ((this.coord.x - 1) !< 0) this.coord.x--;
         else {writeln(RED, "НИЗЯ, БАШКОЙ ДУМАЙ! ПРИДЕЛИ КАРТЫ! ЕТА ПЛОХА!", DEFAULT);
@@ -115,7 +115,7 @@ struct Hero {
         coordHandler();
         return true;
     }
-    /// Функция хождения вправо
+    /// Right going func
     bool goRight() {
         if ((this.coord.x + 1) !> MAPSIZE - 1) this.coord.x++;
         else {  writeln(RED, "НИЗЯ, БАШКОЙ ДУМАЙ! ПРИДЕЛИ КАРТЫ! ЕТА ПЛОХА!", DEFAULT);
@@ -124,7 +124,7 @@ struct Hero {
         coordHandler();
         return true;
     }
-    /// Конструктор
+    /// Constructor
     this(char[11] name, uint health, uint mana,
             uint attackPower, uint spellPower,
             uint damageReduction, uint fortune,
@@ -145,22 +145,22 @@ struct Hero {
     }
 }
 
-Hero hero;
+Hero hero; /// Make new hero
 
 
 void printHeroInfo() {
 
-    std.c.stdlib.system("clear");
+    std.c.stdlib.system("clear"); /// Clen the screen
 
     printMapMini();
     write(PURPLE);
     write("\033[9A");
-    write(" Имя: ", hero.name, "\r\n");
-    write(" Здоровье: ", hero.healthNow,'\\', hero.health, "\r\n");
-    write(" Мана: ", hero.manaNow,'\\', hero.mana, "\r\n");
-    write(" Координаты: [", hero.coord.x,';', hero.coord.y, "]\r\n");
-    write(" Местность: ", heroLocalityType(), "\r\n");
-    write(" Рейтинг: ", hero.rating(), "\r\n");
+    write(" Name: ", hero.name, "\r\n");
+    write(" Health: ", hero.healthNow,'\\', hero.health, "\r\n");
+    write(" Mana: ", hero.manaNow,'\\', hero.mana, "\r\n");
+    write(" Coords: [", hero.coord.x,';', hero.coord.y, "]\r\n");
+    write(" Locality type: ", heroLocalityType(), "\r\n");
+    write(" Rating: ", hero.rating(), "\r\n");
     write("\033[5B");
     write(DEFAULT);
 }
@@ -172,7 +172,7 @@ string heroLocalityType() {
 
 void heroGoTo(string to) {
 
-    write("\r\t На сколько клеток? >");
+    write("\r\t As long? >");
     uint times;
     std.stdio.readf("%d", &times);
     writeln();
@@ -206,15 +206,15 @@ void moveLeft(uint times) {
 
 
 /**
-* Функция генерации героя
+* Hero-generating func
 */
 void heroGenerator(ref Hero genHero) {
 
     auto type = randomInt(2); /// 1 -- маг, 2 -- воин
 
     if (type == 1) genHero = Hero(PlayerNickName,
-                                  STD_HEALTH - randomInt(6)+1, /// Стандартное ХП минус от 0 до 5
-                                  STD_MANA + randomInt(6)-1, /// Стандартная мана плюс от 0 до 5
+                                  STD_HEALTH - randomInt(6)+1,
+                                  STD_MANA + randomInt(6)-1,
                                   STD_ATTACK_POWER - (randomInt(STD_ATTACK_POWER/2 + 1) - 1),
                                   STD_SPELL_POWER + (randomInt(STD_SPELL_POWER/2 + 1) - 1),
                                   STD_REDUCTION,
@@ -222,8 +222,8 @@ void heroGenerator(ref Hero genHero) {
                                   STD_CRIT_STRIKE_RATE);
 
     if (type == 2) genHero = Hero(PlayerNickName,
-                                  STD_HEALTH + randomInt(6)-1, /// Стандартное ХП минус от 0 до 5
-                                  STD_MANA - randomInt(6)+1, /// Стандартная мана плюс от 0 до 5
+                                  STD_HEALTH + randomInt(6)-1,
+                                  STD_MANA - randomInt(6)+1,
                                   STD_ATTACK_POWER + (randomInt(STD_ATTACK_POWER/2 + 1) - 1),
                                   STD_SPELL_POWER - (randomInt(STD_SPELL_POWER/2 + 1) - 1),
                                   STD_REDUCTION,

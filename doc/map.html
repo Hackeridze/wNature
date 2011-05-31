@@ -7,49 +7,69 @@
 <br><br>
 <dl><dt><big>static immutable int <u>MAPSIZE</u>;
 </big></dt>
-<dd>Размер карты <u>MAPSIZE</u>*<u>MAPSIZE</u><br><br>
+<dd>Size of map <u>MAPSIZE</u>*<u>MAPSIZE</u><br><br>
 
 </dd>
 <dt><big>immutable int <u>MINI</u>;
 </big></dt>
-<dd>Кол-во клеток от героя до конца минимапы<br><br>
+<dd>It's hard to explain, <u>MINI</u> -- for mini map =)<br><br>
 
 </dd>
 <dt><big>struct <u>MapCell</u>;
 </big></dt>
-<dd>Структура каждой ячейки карты<br><br>
+<dd>Map cell struct<br><br>
 
 <dl><dt><big>string <u>localityType</u>;
 </big></dt>
-<dd>Бывает bank jungle mountains plain desert water shoal forest<br><br>
+<dd>May be bank jungle mountains plain desert water shoal forest<br><br>
 
 </dd>
 <dt><big>bool <u>open</u>;
 </big></dt>
-<dd>Открыта ли территория? По умолчанию закрыта<br><br>
+<dd>Does its escaped? No by default<br><br>
 
 </dd>
 </dl>
 </dd>
 <dt><big>struct <u>fileMapCell</u>;
 </big></dt>
-<dd>Структура каждой ячейки карты, взятой из файла<br><br>
+<dd>Struct of map cells from the file<br><br>
 
 <dl><dt><big>char <u>localityType</u>;
 </big></dt>
-<dd>Бывает bank(B) jungle(J) mountains(M) plain(P) desert(D) water(W) shoal(S)<br><br>
+<dd>May be bank(B) jungle(J) mountains(M) plain(P) desert(D) water(W) shoal(S)<br><br>
 
 </dd>
 </dl>
 </dd>
 <dt><big>static MapCell[MAPSIZE][MAPSIZE] <u>worldMap</u>;
 </big></dt>
-<dd>Всемирная карта<br><br>
+<dd>World map<br><br>
 
 </dd>
 <dt><big>fileMapCell[MAPSIZE][MAPSIZE] <u>fromFile</u>;
 </big></dt>
-<dd>Карта, взятая из файла<br><br>
+<dd>From-file map<br><br>
+
+</dd>
+<dt><big>void <u>printMapMini</u>();
+</big></dt>
+<dd>Print mini-map<br><br>
+
+</dd>
+<dt><big>void <u>printMapAll</u>();
+</big></dt>
+<dd>Print all map, its fucking large!<br><br>
+
+</dd>
+<dt><big>void <u>printMapPart</u>(ushort <i>how</i>);
+</big></dt>
+<dd>Print a part of the map<br><br>
+
+</dd>
+<dt><big>void <u>getMapFromFile</u>();
+</big></dt>
+<dd>Getting map from the 'world.map' file<br><br>
 
 </dd>
 </dl>

@@ -24,8 +24,6 @@
 * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 */
-
-
 import std.stdio;
 import C = std.c.stdio;
 
@@ -39,14 +37,14 @@ import hero;
 
 int main(char[][] args)
 {
-    writeln(YELLOW, "RPG, IM DYNAMITE!", DEFAULT);
+    writeln(YELLOW, "\t\t\t\twNature", DEFAULT);
     mapInitializator();
-    write("Генерация героя...");
+    write("Generating hero...");
     heroGenerator(hero.hero);
     writeln(LIGHTGREEN, " OK", DEFAULT);
 
 
-    write("Введите свой ник >", RED);
+    write("Type your name here(10 chars max) >", RED);
     C.scanf("%10s", &hero.hero.name);
     write(DEFAULT);
 

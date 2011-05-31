@@ -24,7 +24,8 @@
 * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 */
-module color;
+
+module color; /// Module for the color writing, I see no need to comment all
 
 immutable BLACK="\033[30m";
 immutable BLUE="\033[34m";
@@ -34,6 +35,7 @@ immutable RED="\033[31m";
 immutable PURPLE="\033[35m";
 immutable BROWN="\033[33m";
 immutable GRAY="\033[38m";
+
 
 immutable VONBLACK="\033[40m";
 immutable VONBLUE="\033[44m";
@@ -59,7 +61,6 @@ immutable COLORJUNGLE="\033[7;1;32;43m";
 
 immutable COLORNOTOPENED="\033[7;1;30;41m";
 
-
 immutable LIGHTGRAY="\033[37m";
 immutable DARKGRAY="\033[1;30m";
 immutable LIGHTBLUE="\033[1;34m";
@@ -70,18 +71,18 @@ immutable LIGHTPURPLE="\033[1;35m";
 immutable YELLOW="\033[1;33m";
 immutable WHITE="\033[1;37m";
 
-immutable DEFAULT="\033[0m"; /// все атрибуты по умолчанию
-immutable BOLD="\033[1m"; /// жирный шрифт (интенсивный цвет)
-immutable UNDERLINE="\033[4m"; /// выделение (ярко-белый, независимо от цвета)
-immutable FLASH="\033[5m"; /// мигающий
-immutable REVERSE="\033[7m"; /// реверсия (знаки приобретают цвет фона, а фон -- цвет знаков)
-immutable NOBOLD="\033[22m"; /// установить нормальную интенсивность
-immutable NOUNDERLINE="\033[24m"; /// отменить подчеркивание
-immutable NOFLASH="\033[25m"; /// отменить мигание
-immutable NOREVERSE="\033[27m";  /// отменить реверсию
+immutable DEFAULT="\033[0m"; /// makes all by default
+immutable BOLD="\033[1m"; /// bold (intensive)
+immutable UNDERLINE="\033[4m"; /// make underlines
+immutable FLASH="\033[5m"; /// flash! not works in "terminator"
+immutable REVERSE="\033[7m"; /// revers colors von->font, font->von
+immutable NOBOLD="\033[22m"; /// set normal intensity
+immutable NOUNDERLINE="\033[24m"; /// no underlines)
+immutable NOFLASH="\033[25m"; /// no flash
+immutable NOREVERSE="\033[27m";  /// no reverse
 
 
-/**
+/** RUSSIAN
 Управление цветом
   \033[0m все атрибуты по умолчанию
   \033[1m жирный шрифт (интенсивный цвет)

@@ -29,7 +29,7 @@ module random;
 import std.random;
 
 /**
-* Возвращает случайное число от 1 до max
+* Returns random integer from 1 to max
 */
 uint randomInt(uint max) {
     auto rnd0 = MinstdRand0(1);

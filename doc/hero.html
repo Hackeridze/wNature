@@ -7,22 +7,22 @@
 <br><br>
 <dl><dt><big>static char[11LU] <u>PlayerNickName</u>;
 </big></dt>
-<dd>Ник игрока, Максимум 10 символов<br><br>
+<dd>Player's nickname, 10 chars maximum long<br><br>
 
 </dd>
 <dt><big>immutable int <u>STD_SPELL_POWER</u>;
 </big></dt>
-<dd>ДЕЛАТЬ ВСЕГДА КРАТНЫМ ДВУМ<br><br>
+<dd>Have always done a multiple of two<br><br>
 
 </dd>
 <dt><big>immutable int <u>STD_ATTACK_POWER</u>;
 </big></dt>
-<dd>ДЕЛАТЬ ВСЕГДА КРАТНЫМ ДВУМ<br><br>
+<dd>Have always done a multiple of two<br><br>
 
 </dd>
 <dt><big>static immutable Coord <u>START_COORD</u>;
 </big></dt>
-<dd>Начальные коордлинаты героя, х = 0 и у = 0<br><br>
+<dd>Start hero coordinates, х = 45 и у = 15<br><br>
 
 </dd>
 <dt><big>struct <u>Coord</u>;
@@ -32,93 +32,113 @@
 </dd>
 <dt><big>struct <u>Hero</u>;
 </big></dt>
-<dd>Герой<br><br>
+<dd><u>Hero</u><br><br>
 
 <dl><dt><big>char[11LU] <u>name</u>;
 </big></dt>
-<dd>Имя<br><br>
+<dd>Name<br><br>
 
 </dd>
 <dt><big>uint <u>health</u>;
 </big></dt>
-<dd>Здоровье<br><br>
+<dd>Health, maximum<br><br>
+
+</dd>
+<dt><big>uint <u>healthNow</u>;
+</big></dt>
+<dd>Health, now<br><br>
 
 </dd>
 <dt><big>uint <u>mana</u>;
 </big></dt>
-<dd>Мана<br><br>
+<dd>Mana, maximum<br><br>
+
+</dd>
+<dt><big>uint <u>manaNow</u>;
+</big></dt>
+<dd>Mana, now<br><br>
 
 </dd>
 <dt><big>uint <u>attackPower</u>;
 </big></dt>
-<dd>Сила атаки<br><br>
+<dd>Attack power<br><br>
 
 </dd>
 <dt><big>uint <u>spellPower</u>;
 </big></dt>
-<dd>Сила заклинаний<br><br>
+<dd>Spell power<br><br>
 
 </dd>
 <dt><big>uint <u>damageReduction</u>;
 </big></dt>
-<dd>Блокировка урона<br><br>
+<dd>Damage reduction<br><br>
 
 </dd>
 <dt><big>uint <u>fortune</u>;
 </big></dt>
-<dd>Удача<br><br>
+<dd><u>fortune</u><br><br>
 
 </dd>
 <dt><big>uint <u>critStrikeRate</u>;
 </big></dt>
-<dd>Рейтинг критического удара<br><br>
+<dd>Critical strike rating<br><br>
 
 </dd>
 <dt><big>uint <u>armor</u>;
 </big></dt>
-<dd>Броня<br><br>
+<dd>Armor<br><br>
 
 </dd>
 <dt><big>string[32LU] <u>inventory</u>;
 </big></dt>
-<dd>Инвентарь<br><br>
+<dd>Inventory<br><br>
+
+</dd>
+<dt><big>Coord <u>coord</u>;
+</big></dt>
+<dd>initialize hero coords by START_COORDS<br><br>
 
 </dd>
 <dt><big>float <u>rating</u>();
 </big></dt>
-<dd>Функция возвращает рейтинг, да<br><br>
+<dd>Returns <u>rating</u>. FUCK! WTF?<br><br>
 
 </dd>
 <dt><big>bool <u>goUp</u>();
 </big></dt>
-<dd>Функция хождения вверх<br><br>
+<dd>Up going func<br><br>
 
 </dd>
 <dt><big>bool <u>goDown</u>();
 </big></dt>
-<dd>Функция хождения вниз<br><br>
+<dd>Down  going func<br><br>
 
 </dd>
 <dt><big>bool <u>goLeft</u>();
 </big></dt>
-<dd>Функция хождения влево<br><br>
+<dd>Left going func<br><br>
 
 </dd>
 <dt><big>bool <u>goRight</u>();
 </big></dt>
-<dd>Функция хождения вправо<br><br>
+<dd>Right going func<br><br>
 
 </dd>
 <dt><big>this(char[11LU] <i>name</i>, uint <i>health</i>, uint <i>mana</i>, uint <i>attackPower</i>, uint <i>spellPower</i>, uint <i>damageReduction</i>, uint <i>fortune</i>, uint <i>critStrikeRate</i>);
 </big></dt>
-<dd>Конструктор<br><br>
+<dd>Constructor<br><br>
 
 </dd>
 </dl>
 </dd>
+<dt><big>Hero <u>hero</u>;
+</big></dt>
+<dd>Make new <u>hero</u><br><br>
+
+</dd>
 <dt><big>void <u>heroGenerator</u>(ref Hero <i>genHero</i>);
 </big></dt>
-<dd>Функция генерации героя<br><br>
+<dd>Hero-generating func<br><br>
 
 </dd>
 </dl>
