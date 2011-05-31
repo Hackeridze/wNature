@@ -1,1 +1,22 @@
     wNature is smthing like RPG-game, I think...
+
+        1) HOW-TO
+        2) LICENSE
+        3) CODE-DOCUMENTATION
+        4) AUTHORS
+
+        1) To compile this programm you need D2.0 compiler(DMD) which you can download here: 
+            http://www.digitalmars.com/d/download.html
+
+    After installing DMD, just type
+            ./build.sh
+
+    To run type
+            ./wNature
+
+
+        2) About license you can read in LICENSE file
+
+        3) Documentation generated from source DOC-COMMENTS, you can find it in ./doc as *.html files
+
+        4) Authors are Victor Hackeridze(hackeridze@gmail.com) and Fladimir Deathjam(b.mussolini89@yandex.kz)

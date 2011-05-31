@@ -1,3 +1,6 @@
+    ALL FILES HERE AND IN SUB DIRECTORIES ARE UNDER BSD(THIS) LICENSE
+
+
 /*
 * Copyright (c) 2011, Victor Hackeridze All rights reserved.
 *
@@ -24,46 +27,3 @@
 * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 */
-
-
-import std.stdio;
-import C = std.c.stdio;
-
-
-import color;
-import map;
-import random;
-import commands;
-import hero;
-/// ● ● ы, СИМВОЛ)
-
-int main(char[][] args)
-{
-    writeln(YELLOW, "RPG, IM DYNAMITE!", DEFAULT);
-    mapInitializator();
-    write("Генерация героя...");
-    heroGenerator(hero.hero);
-    writeln(LIGHTGREEN, " OK", DEFAULT);
-
-
-    write("Введите свой ник >", RED);
-    C.scanf("%10s", &hero.hero.name);
-    write(DEFAULT);
-
-
-    writeln();
-
-    printHeroInfo();
-
-    for (;;) {
-        string command = "Unique command";
-        write("\r >", RED);
-        stdin.readln(command);
-        write(DEFAULT, "\r");
-
-        if (processCommand(command) == false) break;
-    }
-
-    write(DEFAULT, "\r");
-    return 0;
-}
