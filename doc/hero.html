@@ -10,6 +10,16 @@
 <dd>Player's nickname, 10 chars maximum long<br><br>
 
 </dd>
+<dt><big>immutable int <u>STD_HEALTH</u>;
+</big></dt>
+<dd>Standart health<br><br>
+
+</dd>
+<dt><big>immutable int <u>STD_MANA</u>;
+</big></dt>
+<dd>Standart mana<br><br>
+
+</dd>
 <dt><big>immutable int <u>STD_SPELL_POWER</u>;
 </big></dt>
 <dd>Have always done a multiple of two<br><br>
@@ -20,14 +30,29 @@
 <dd>Have always done a multiple of two<br><br>
 
 </dd>
+<dt><big>immutable int <u>STD_FORTUNE</u>;
+</big></dt>
+<dd>It's fate, standart fate ;D<br><br>
+
+</dd>
+<dt><big>immutable int <u>STD_REDUCTION</u>;
+</big></dt>
+<dd>Standart damage reduction<br><br>
+
+</dd>
+<dt><big>immutable int <u>STD_CRIT_STRIKE_RATE</u>;
+</big></dt>
+<dd>Standart critical strike rating<br><br>
+
+</dd>
 <dt><big>static immutable Coord <u>START_COORD</u>;
 </big></dt>
-<dd>Start hero coordinates, х = 45 и у = 15<br><br>
+<dd>Hero start coordinates, х = 45 и у = 15<br><br>
 
 </dd>
 <dt><big>struct <u>Coord</u>;
 </big></dt>
-<dd>Координаты<br><br>
+<dd>Coordinates structure<br><br>
 
 </dd>
 <dt><big>struct <u>Hero</u>;
@@ -39,7 +64,7 @@
 <dd>Name<br><br>
 
 </dd>
-<dt><big>uint <u>health</u>;
+<dt><big>int <u>health</u>;
 </big></dt>
 <dd>Health, maximum<br><br>
 
@@ -99,9 +124,24 @@
 <dd>initialize hero coords by START_COORDS<br><br>
 
 </dd>
+<dt><big>void <u>dieNow</u>();
+</big></dt>
+<dd>Cause death immidiatly<br><br>
+
+</dd>
+<dt><big>void <u>dieCheck</u>();
+</big></dt>
+<dd>Cheсk do hero die or not<br><br>
+
+</dd>
+<dt><big>void <u>takingDamage</u>(Mob <i>fromMob</i>);
+</big></dt>
+<dd>Taking damage from mob '<i>fromMob</i>'<br><br>
+
+</dd>
 <dt><big>float <u>rating</u>();
 </big></dt>
-<dd>Returns <u>rating</u>. FUCK! WTF?<br><br>
+<dd>Returns <u>rating</u>. Doesn't it?<br><br>
 
 </dd>
 <dt><big>bool <u>goUp</u>();
@@ -133,7 +173,22 @@
 </dd>
 <dt><big>Hero <u>hero</u>;
 </big></dt>
-<dd>Make new <u>hero</u><br><br>
+<dd>Making new <u>hero</u><br><br>
+
+</dd>
+<dt><big>void <u>printHeroInfo</u>();
+</big></dt>
+<dd>Printing current info about the hero<br><br>
+
+</dd>
+<dt><big>string <u>heroLocalityType</u>();
+</big></dt>
+<dd>Returns type of locality where hero is now<br><br>
+
+</dd>
+<dt><big>void <u>heroGoTo</u>(string <i>to</i>);
+</big></dt>
+<dd>Allows long-walks<br><br>
 
 </dd>
 <dt><big>void <u>heroGenerator</u>(ref Hero <i>genHero</i>);

@@ -32,19 +32,20 @@ public import map;
 import random;
 import color;
 import handlers;
+import mobs;
 
 static char[11] PlayerNickName = '\n'; /// Player's nickname, 10 chars maximum long
-immutable STD_HEALTH = 20;
-immutable STD_MANA = 20;
+immutable STD_HEALTH = 20; /// Standart health
+immutable STD_MANA = 20; /// Standart mana
 immutable STD_SPELL_POWER = 2; /// Have always done a multiple of two
 immutable STD_ATTACK_POWER = 2; /// Have always done a multiple of two
-immutable STD_FORTUNE = 0;
-immutable STD_REDUCTION = 0;
-immutable STD_CRIT_STRIKE_RATE = 0;
+immutable STD_FORTUNE = 0; /// It's fate, standart fate ;D
+immutable STD_REDUCTION = 0; /// Standart damage reduction
+immutable STD_CRIT_STRIKE_RATE = 0; /// Standart critical strike rating
 
-static immutable START_COORD = Coord(45, 15); /// Start hero coordinates, х = 45 и у = 15
+static immutable START_COORD = Coord(45, 15); /// Hero start coordinates, х = 45 и у = 15
 
-/// Координаты
+/// Coordinates structure
 struct Coord {
     int x;
     int y;
@@ -60,7 +61,7 @@ struct Coord {
 */
 struct Hero {
     char[11] name; /// Name
-    uint health; /// Health, maximum
+    int health; /// Health, maximum
     uint healthNow; /// Health, now
     uint mana; /// Mana, maximum
     uint manaNow; /// Mana, now
@@ -75,24 +76,37 @@ struct Hero {
     string[32] inventory; /// Inventory
 
     Coord coord = START_COORD; /// initialize hero coords by START_COORDS
-
-    void die() {
+    /// Cause death immidiatly
+    void dieNow() {
+        this.healthNow = 0;
+        this.dieCheck();
+    }
+    /// Cheсk do hero die or not
+    void dieCheck() {
         if (this.healthNow <= 0) {
-            writeln("You die... Let ",heroLocalityType()," be a piece of shit for you!");
+            writeln("You die... Rest in ",heroLocalityType());
         }
     }
-
-    /// Returns rating. FUCK! WTF?
+    /// Taking damage from mob 'fromMob'
+    void takingDamage(Mob fromMob) {
+        this.healthNow -= fromMob.damage();
+        this.dieCheck();
+    }
+    /// Returns rating. Doesn't it?
     float rating() {
         float rating = (((this.health + this.mana)*38)/75 + ((this.attackPower + this.spellPower)*67)/81);
         rating /= 13.2546798511277;
         return rating;
     }
+
+    void printWarningEdjeOfMap() {
+        writeln(RED, "Now you are in a such place where our developers' hand didn't reach.", DEFAULT);
+    }
     /// Up going func
     bool goUp() {
         if ((this.coord.y - 1) !< 0) this.coord.y--;
-        else {  writeln(RED, "НИЗЯ, БАШКОЙ ДУМАЙ! ПРИДЕЛИ КАРТЫ! ЕТА ПЛОХА!", DEFAULT);
-                return false;
+        else {printWarningEdjeOfMap();
+            return false;
         }
         coordHandler();
         return true;
@@ -100,8 +114,8 @@ struct Hero {
     /// Down  going func
     bool goDown() {
         if ((this.coord.y + 1) !> MAPSIZE - 1) this.coord.y++;
-        else {writeln(RED, "НИЗЯ, БАШКОЙ ДУМАЙ! ПРИДЕЛИ КАРТЫ! ЕТА ПЛОХА!", DEFAULT);
-        return false;
+        else {printWarningEdjeOfMap();
+            return false;
         }
         coordHandler();
         return true;
@@ -109,8 +123,8 @@ struct Hero {
     /// Left going func
     bool goLeft() {
         if ((this.coord.x - 1) !< 0) this.coord.x--;
-        else {writeln(RED, "НИЗЯ, БАШКОЙ ДУМАЙ! ПРИДЕЛИ КАРТЫ! ЕТА ПЛОХА!", DEFAULT);
-        return false;
+        else {printWarningEdjeOfMap();
+            return false;
         }
         coordHandler();
         return true;
@@ -118,17 +132,17 @@ struct Hero {
     /// Right going func
     bool goRight() {
         if ((this.coord.x + 1) !> MAPSIZE - 1) this.coord.x++;
-        else {  writeln(RED, "НИЗЯ, БАШКОЙ ДУМАЙ! ПРИДЕЛИ КАРТЫ! ЕТА ПЛОХА!", DEFAULT);
-                return false;
+        else {printWarningEdjeOfMap();
+            return false;
         }
         coordHandler();
         return true;
     }
     /// Constructor
     this(char[11] name, uint health, uint mana,
-            uint attackPower, uint spellPower,
-            uint damageReduction, uint fortune,
-            uint critStrikeRate) {
+                uint attackPower, uint spellPower,
+                uint damageReduction, uint fortune,
+                uint critStrikeRate) {
 
         this.name = name;
 
@@ -145,12 +159,12 @@ struct Hero {
     }
 }
 
-Hero hero; /// Make new hero
+Hero hero; /// Making new hero
 
-
+/// Printing current info about the hero
 void printHeroInfo() {
 
-    std.c.stdlib.system("clear"); /// Clen the screen
+    std.c.stdlib.system("clear"); /// Clean the screen
 
     printMapMini();
     write(PURPLE);
@@ -161,18 +175,18 @@ void printHeroInfo() {
     write(" Coords: [", hero.coord.x,';', hero.coord.y, "]\r\n");
     write(" Locality type: ", heroLocalityType(), "\r\n");
     write(" Rating: ", hero.rating(), "\r\n");
-    write("\033[5B");
+    write("\033[3B");
     write(DEFAULT);
 }
-
+/// Returns type of locality where hero is now
 string heroLocalityType() {
     return map.worldMap[hero.coord.y][hero.coord.x].localityType;
 }
 
-
+/// Allows long-walks
 void heroGoTo(string to) {
 
-    write("\r\t As long? >");
+    write("\r\t How long? >");
     uint times;
     std.stdio.readf("%d", &times);
     writeln();

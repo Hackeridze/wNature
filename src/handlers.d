@@ -48,14 +48,34 @@ void coordHandler() {
     for(int t = 0; t < suitable.length; ++t) {
         if (randomInt(3) == 1){}
         else {
-            auto battleResult = battle( get(suitable[t]) );
+            printHeroInfo();
+            auto attacker = get(suitable[t]);
+            auto battleResult = battle( attacker );
             if (battleResult == "try to escape") {
-                switch (randomInt(100)) {
-                    case 1: hero.hero.die();
+                switch (randomInt(15)) {
+                    case 1: hero.hero.dieNow();
+                    break;
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12: hero.hero.takingDamage( attacker );
+                             writeln( " You managed to escape from the ",attacker.name,'!');
+                    break;
+                    case 13:
+                    case 14:
+                    case 15: writeln("And you're lucky!");
+                             writeln( " You managed to escape from the ",attacker.name,'!');
+                    break;
                 }
+
             }
-
-
         }
     }
 }
@@ -63,7 +83,6 @@ void coordHandler() {
 * Battle-func
 */
 string battle(Mob withMob) {
-    printHeroInfo();
     writeln('\n',withMob.name," attack you!\n\r\tWhat shall we do?");
 
     for (;;) {

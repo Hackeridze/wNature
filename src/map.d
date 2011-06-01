@@ -37,17 +37,17 @@ static immutable MAPSIZE = 150; /// Size of map MAPSIZE*MAPSIZE
 immutable MINI = 4;/// It's hard to explain, MINI -- for mini map =)
 
 /**
-* Map cell struct
+* Map cell structure
 */
 struct MapCell {
-    string localityType; /// May be bank jungle mountains plain desert water shoal forest
-    bool open = false; /// Does its escaped? No by default
+    string localityType; /// Can be bank jungle mountains plain desert water shoal forest
+    bool open = false; /// Terra incognito?
 }
 /**
-* Struct of map cells from the file
+* Structure of map cells from the file
 */
 struct fileMapCell {
-    char localityType; /// May be bank(B) jungle(J) mountains(M) plain(P) desert(D) water(W) shoal(S)
+    char localityType; /// Can be bank(B) jungle(J) mountains(M) plain(P) desert(D) water(W) shoal(S)
 }
 
 static MapCell[MAPSIZE][MAPSIZE] worldMap; /// World map
@@ -164,7 +164,7 @@ void printMapMini() {
     write(DEFAULT);
 }
 
-/// Print all map, its fucking large!
+/// Print all map, it's enormous!
 void printMapAll() {
 
     int column, row;

@@ -91,7 +91,7 @@ bool processBattleCommand(string command) {
 
     if (command == "run\n") return false;
 
-    else if (command == "map\n") printMapPart(70);
+    else if (command == "map\n") printMapPart(5);
 
     else if (command == "info\n") printHeroInfo();
 

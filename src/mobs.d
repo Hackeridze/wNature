@@ -34,11 +34,23 @@ import std.stdio;
 struct Mob {
     string name;
     uint health;
+    int healthNow;
     uint attackPower;
     uint spellPower;
     ulong id;
-    string habitat;
+    string habitat; /// Can be bank jungle mountains plain desert water shoal forest
+    //string weapon; /// Can be tusks fangs
 
+    /// Returns current damage
+    uint damage() {
+        if (randomInt(10) == 1) {
+            writeln(this.name," mised!");
+            return 0;
+        } else {
+            write(this.name," deals ",this.attackPower," damage!");
+            return this.attackPower;
+        }
+    }
 
     /// Returns the rating
     float rating() {
@@ -48,13 +60,15 @@ struct Mob {
     }
 
     this(string name, uint health, uint attackPower,
-            uint spellPower, string habitat, ulong id) {
+                uint spellPower, string habitat, ulong id/*, string weapon*/) {
         this.name = name;
         this.health = health;
         this.attackPower = attackPower;
         this.spellPower = spellPower;
         this.id = id;
         this.habitat = habitat;
+        this.healthNow = this.health;
+        //this.weapon = weapon;
     }
 }
 
@@ -120,7 +134,8 @@ static Mob boar() {
     uint attackPower = 3;
     uint spellPower = 0;
     ulong id = 0; /// ID
-    string habitat = "forest";/// Habitat, may be bank jungle mountains plain desert water shoal forest
+    string habitat = "forest"; /// Habitat, may be bank jungle mountains plain desert water shoal forest
+    //string weapon = "tusks";
 
     auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
     return mob;
@@ -133,6 +148,7 @@ static Mob wolf() {
     uint spellPower = 0;
     ulong id = 1;
     string habitat = "forest";
+    //string weapon = "fangs";
 
     auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
     return mob;
