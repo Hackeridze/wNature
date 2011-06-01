@@ -25,6 +25,7 @@
 		<Unit filename="src/map.d" />
 		<Unit filename="src/mobs.d" />
 		<Unit filename="src/random.d" />
+		<Unit filename="src/skills.d" />
 		<Extensions>
 			<code_completion />
 			<debugger />
