@@ -33,6 +33,7 @@ import random;
 import color;
 import handlers;
 import mobs;
+static import skills;
 
 static char[11] PlayerNickName = '\n'; /// Player's nickname, 10 chars maximum long
 immutable STD_HEALTH = 20; /// Standart health
@@ -60,7 +61,7 @@ struct Coord {
 * Hero
 */
 struct Hero {
-    char[11] name; /// Name
+    char[16] name; /// Name
     int health; /// Health, maximum
     uint healthNow; /// Health, now
     uint mana; /// Mana, maximum
@@ -68,14 +69,19 @@ struct Hero {
     uint attackPower; /// Attack power
     uint spellPower; /// Spell power
     uint damageReduction; /// Damage reduction
-    uint fortune; /// fortune
+    uint fortune; /// Fortune
     uint critStrikeRate; /// Critical strike rating
 
     uint armor = 0; /// Armor
 
-    string[32] inventory; /// Inventory
+    uint[32] inventory; /// Inventory
 
-    Coord coord = START_COORD; /// initialize hero coords by START_COORDS
+    Coord coord = START_COORD; /// Initialize hero coords by START_COORDS
+
+    /// USing skills)
+    void useSkills() {
+
+    }
     /// Cause death immidiatly
     void dieNow() {
         this.healthNow = 0;
@@ -98,14 +104,15 @@ struct Hero {
         rating /= 13.2546798511277;
         return rating;
     }
-
+    /// Prints the warning
     void printWarningEdjeOfMap() {
         writeln(RED, "Now you are in a such place where our developers' hand didn't reach.", DEFAULT);
     }
     /// Up going func
     bool goUp() {
         if ((this.coord.y - 1) !< 0) this.coord.y--;
-        else {printWarningEdjeOfMap();
+        else {
+            printWarningEdjeOfMap();
             return false;
         }
         coordHandler();
@@ -114,7 +121,8 @@ struct Hero {
     /// Down  going func
     bool goDown() {
         if ((this.coord.y + 1) !> MAPSIZE - 1) this.coord.y++;
-        else {printWarningEdjeOfMap();
+        else {
+            printWarningEdjeOfMap();
             return false;
         }
         coordHandler();
@@ -123,7 +131,8 @@ struct Hero {
     /// Left going func
     bool goLeft() {
         if ((this.coord.x - 1) !< 0) this.coord.x--;
-        else {printWarningEdjeOfMap();
+        else {
+            printWarningEdjeOfMap();
             return false;
         }
         coordHandler();
@@ -132,7 +141,8 @@ struct Hero {
     /// Right going func
     bool goRight() {
         if ((this.coord.x + 1) !> MAPSIZE - 1) this.coord.x++;
-        else {printWarningEdjeOfMap();
+        else {
+            printWarningEdjeOfMap();
             return false;
         }
         coordHandler();
@@ -174,8 +184,9 @@ void printHeroInfo() {
     write(" Mana: ", hero.manaNow,'\\', hero.mana, "\r\n");
     write(" Coords: [", hero.coord.x,';', hero.coord.y, "]\r\n");
     write(" Locality type: ", heroLocalityType(), "\r\n");
-    write(" Rating: ", hero.rating(), "\r\n");
-    write("\033[3B");
+    write(" Attack power: ", hero.attackPower, "\r\n");
+    write(" Spell power: ", hero.spellPower, "\r\n");
+    write("\033[2B");
     write(DEFAULT);
 }
 /// Returns type of locality where hero is now

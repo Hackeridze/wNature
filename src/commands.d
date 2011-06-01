@@ -32,6 +32,7 @@ import map;
 import hero;
 import color;
 
+
 /**
 * Command processor
 */
@@ -39,7 +40,7 @@ bool processCommand(string command) {
 
     if (command == "exit\n") return false;
 
-    else if (command == "map\n") printMapPart(70);
+    else if (command == "map\n") printMapPart();
 
     else if (command == "n\n") hero.hero.goUp();
     else if (command == "s\n") hero.hero.goDown();
@@ -87,28 +88,31 @@ void printCommands() {
 /**
 * Battle commands processor
 */
-bool processBattleCommand(string command) {
+string processBattleCommand(string command) {
 
-    if (command == "run\n") return false;
+    if (command == "run\n") return "false";
 
-    else if (command == "map\n") printMapPart(5);
+    //else if (command == "map\n") printMapPart();
 
     else if (command == "info\n") printHeroInfo();
 
     else if (command == "help\n") printBattleCommands();
 
-    return true;
+    else if (command == "battle\n") return "let the battle begin";
+    return "all okay";
 }
 /**
 * Print all battle commands
 */
 void printBattleCommands() {
     write(RED);
-    writeln("\n Commands:");
+
+    writeln("\n Battle commands:");
+
     write(LIGHTRED);
+
     writeln("\trun -- you can try to run away from the mob");
-
-
+    writeln("\tbattle -- you can try to kick mob's ass ;)");
     writeln("\tinfo -- current info about your hero");
 
     write(DEFAULT);

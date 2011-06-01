@@ -51,7 +51,7 @@ void coordHandler() {
             printHeroInfo();
             auto attacker = get(suitable[t]);
             auto battleResult = battle( attacker );
-            if (battleResult == "try to escape") {
+            if      (battleResult == "try to escape") {
                 switch (randomInt(15)) {
                     case 1: hero.hero.dieNow();
                     break;
@@ -74,11 +74,11 @@ void coordHandler() {
                              writeln( " You managed to escape from the ",attacker.name,'!');
                     break;
                 }
-
-            }
+            }//else if()
         }
     }
 }
+
 /**
 * Battle-func
 */
@@ -87,22 +87,19 @@ string battle(Mob withMob) {
 
     for (;;) {
         string command = "Unique command";
+
         write("\r >", RED);
         stdin.readln(command);
         write(DEFAULT, "\r");
 
-        if (processBattleCommand(command) == false) return "try to escape";
+        auto processingAnswer = processBattleCommand(command);
+
+        if (processingAnswer == "false") return "try to escape";
+        else if (processingAnswer
+                    == "let the battle begin") hero.hero.useSkills();
     }
 
 }
-
-
-
-
-
-
-
-
 
 
 /**

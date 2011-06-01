@@ -24,44 +24,41 @@
 * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 * POSSIBILITY OF SUCH DAMAGE.
 */
-import std.stdio;
-import C = std.c.stdio;
+module skills;/// Hero's skills!
 
+struct Skill{
+    string name;
+    ushort damage;
+    bool opened = false;
 
-import color;
-import map;
-import random;
-import commands;
-import hero;
-/// ● ● ы, СИМВОЛ)
-
-int main(char[][] args)
-{
-    writeln(YELLOW, "\t\t\t\twNature", DEFAULT);
-    mapInitializator();
-    write("Generating hero...");
-    heroGenerator(hero.hero);
-    writeln(LIGHTGREEN, " OK", DEFAULT);
-
-
-    write("Type your name here(15 chars max) >", RED);
-    C.scanf("%15s", &hero.hero.name);
-    write(DEFAULT);
-
-
-    writeln();
-
-    printHeroInfo();
-
-    for (;;) {
-        string command = "Unique command";
-        write("\r >", RED);
-        stdin.readln(command);
-        write(DEFAULT, "\r");
-
-        if (processCommand(command) == false) break;
+    void open(){
+        this.opened = true;
     }
 
-    write(DEFAULT, "\r");
-    return 0;
+    this(string name, ushort damage){
+        this.name = name;
+        this.damage = damage;
+    }
 }
+
+immutable NUMBER_OF_SKILLS = 2; /// last ID + 1
+Skill get(const ulong id) {
+    switch (id) {
+        case 0: return Skill("Simple Hand Attack", 1);
+        break;
+        case 1: return Skill("Simple Spell Attack", 1);
+        break;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+

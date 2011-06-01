@@ -59,7 +59,7 @@
 </big></dt>
 <dd><u>Hero</u><br><br>
 
-<dl><dt><big>char[11LU] <u>name</u>;
+<dl><dt><big>char[16LU] <u>name</u>;
 </big></dt>
 <dd>Name<br><br>
 
@@ -101,7 +101,7 @@
 </dd>
 <dt><big>uint <u>fortune</u>;
 </big></dt>
-<dd><u>fortune</u><br><br>
+<dd>Fortune<br><br>
 
 </dd>
 <dt><big>uint <u>critStrikeRate</u>;
@@ -114,14 +114,19 @@
 <dd>Armor<br><br>
 
 </dd>
-<dt><big>string[32LU] <u>inventory</u>;
+<dt><big>uint[32LU] <u>inventory</u>;
 </big></dt>
 <dd>Inventory<br><br>
 
 </dd>
 <dt><big>Coord <u>coord</u>;
 </big></dt>
-<dd>initialize hero coords by START_COORDS<br><br>
+<dd>Initialize hero coords by START_COORDS<br><br>
+
+</dd>
+<dt><big>void <u>useSkills</u>();
+</big></dt>
+<dd>USing skills)<br><br>
 
 </dd>
 <dt><big>void <u>dieNow</u>();
@@ -142,6 +147,11 @@
 <dt><big>float <u>rating</u>();
 </big></dt>
 <dd>Returns <u>rating</u>. Doesn't it?<br><br>
+
+</dd>
+<dt><big>void <u>printWarningEdjeOfMap</u>();
+</big></dt>
+<dd>Prints the warning<br><br>
 
 </dd>
 <dt><big>bool <u>goUp</u>();

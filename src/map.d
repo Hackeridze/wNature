@@ -35,7 +35,7 @@ import handlers;
 
 static immutable MAPSIZE = 150; /// Size of map MAPSIZE*MAPSIZE
 immutable MINI = 4;/// It's hard to explain, MINI -- for mini map =)
-
+immutable MAPPART= 20;/// It's hard to explain, MAPPART -- for part of map =)
 /**
 * Map cell structure
 */
@@ -251,22 +251,22 @@ void printMapAll() {
 
 
 /// Print a part of the map
-void printMapPart(ushort how) {
+void printMapPart() {
 
     writeln(DEFAULT);
 
     int column, row, maxColumn, maxRow, ttt;
 
-    if (!((hero.hero.coord.x - how) < 0)) column = (hero.hero.coord.x - how);
+    if (!((hero.hero.coord.x - MAPPART) < 0)) column = (hero.hero.coord.x - MAPPART);
     else column = 0;
 
-    if (!((hero.hero.coord.x + how) > MAPSIZE)) maxColumn = (hero.hero.coord.x + how);
+    if (!((hero.hero.coord.x + MAPPART) > MAPSIZE)) maxColumn = (hero.hero.coord.x + MAPPART);
     else maxColumn = MAPSIZE;
 
-    if (!((hero.hero.coord.y + how) >MAPSIZE)) maxRow = (hero.hero.coord.y + how);
+    if (!((hero.hero.coord.y + MAPPART) >MAPSIZE)) maxRow = (hero.hero.coord.y + MAPPART);
     else maxRow = MAPSIZE;
 
-    if (!((hero.hero.coord.y - how) < 0)) row = (hero.hero.coord.y - how);
+    if (!((hero.hero.coord.y - MAPPART) < 0)) row = (hero.hero.coord.y - MAPPART);
     else row = 0;
 
     printMapCapNoTab(column, maxColumn);
@@ -275,7 +275,7 @@ void printMapPart(ushort how) {
 
         ttt = 0;
 
-        if (!((hero.hero.coord.x - how) < 0)) column = (hero.hero.coord.x - how);
+        if (!((hero.hero.coord.x - MAPPART) < 0)) column = (hero.hero.coord.x - MAPPART);
         else column = 0;
 
         printMapRow(ttt, row);

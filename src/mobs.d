@@ -97,7 +97,10 @@ ulong[] generateMobs() {
             suitable ~= suitableByLocality[t];
         }
     }
-    return suitable;
+    auto ret = suitable;
+    suitable.length = 1;
+    suitable = null;
+    return ret;
 }
 
 Mob get(const ulong id) {
@@ -121,11 +124,12 @@ Mob get(const ulong id) {
         case 8: return wolverine();
         break;
         case 9: return crucian();
+        break;
     }
 }
 
-/// Всего мобов:
-immutable NUMBER_OF_MOBS = 10; /// ID последнего + 1
+/// Number of mobs:
+immutable NUMBER_OF_MOBS = 10; /// last ID + 1
 
 
 static Mob boar() {
@@ -244,7 +248,7 @@ static Mob crucian() {
     uint attackPower = 1;
     uint spellPower = 0;
     ulong id = 9;
-    string habitat = "shoal";
+    string habitat = "bank";
 
     auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
     return mob;
