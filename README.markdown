@@ -8,10 +8,10 @@ HOW-TO
 To compile this programm you need D2.0 compiler(DMD) which you can download here: http://www.digitalmars.com/d/download.html
 
 After installing DMD, just type
-    ./build.sh
+    `./build.sh`
 
 To run type
-    ./wNature
+    `./wNature`
 
 LICENSE
 -------
