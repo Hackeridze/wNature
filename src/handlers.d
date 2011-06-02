@@ -66,11 +66,11 @@ void coordHandler() {
                     case 10:
                     case 11:
                     case 12: hero.hero.takingDamage( attacker );
-                             writeln( " You managed to escape from the ",attacker.name,'!');
+                             writeln(" You managed to escape from the ",attacker.name,'!');
                     break;
                     case 13:
                     case 14:
-                    case 15: writeln("And you're lucky!");
+                    case 15: write("And you're lucky!");
                              writeln( " You managed to escape from the ",attacker.name,'!');
                     break;
                 }

@@ -62,10 +62,10 @@ struct Coord {
 */
 struct Hero {
     char[16] name; /// Name
-    int health; /// Health, maximum
-    uint healthNow; /// Health, now
+    uint health; /// Health, maximum
+    int healthNow; /// Health, now
     uint mana; /// Mana, maximum
-    uint manaNow; /// Mana, now
+    int manaNow; /// Mana, now
     uint attackPower; /// Attack power
     uint spellPower; /// Spell power
     uint damageReduction; /// Damage reduction
@@ -78,7 +78,7 @@ struct Hero {
 
     Coord coord = START_COORD; /// Initialize hero coords by START_COORDS
 
-    /// USing skills)
+    /// Using skills)
     void useSkills() {
 
     }

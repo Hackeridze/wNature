@@ -33,6 +33,7 @@ import map;
 import random;
 import commands;
 import hero;
+static import skills;
 /// ● ● ы, СИМВОЛ)
 
 int main(char[][] args)
@@ -41,6 +42,7 @@ int main(char[][] args)
     mapInitializator();
     write("Generating hero...");
     heroGenerator(hero.hero);
+    skills.simpleAttackInitializator();
     writeln(LIGHTGREEN, " OK", DEFAULT);
 
 

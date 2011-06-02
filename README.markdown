@@ -3,7 +3,7 @@
     ============================================
 
 HOW-TO
-======
+------
 
     To compile this programm you need D2.0 compiler(DMD) which you can download here:
 
@@ -16,18 +16,18 @@ HOW-TO
             ./wNature
 
 LICENSE
-=======
+-------
 
     About license you can read in LICENSE file
 
 
 DOCS
-====
+----
 
     Documentation generated from source DOC-COMMENTS, you can find it in ./doc as *.html files
 
 
 AUTORS
-======
+------
 
     Authors are Victor Hackeridze(hackeridze@gmail.com) and Fladimir Deathjam(b.mussolini89@yandex.kz)

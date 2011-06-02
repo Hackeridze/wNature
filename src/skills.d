@@ -28,6 +28,7 @@ module skills;/// Hero's skills!
 
 struct Skill{
     string name;
+    string command;
     ushort damage;
     bool opened = false;
 
@@ -35,22 +36,30 @@ struct Skill{
         this.opened = true;
     }
 
-    this(string name, ushort damage){
+    this(string name, string command, ushort damage){
         this.name = name;
         this.damage = damage;
+        this.command = command;
     }
 }
 
 immutable NUMBER_OF_SKILLS = 2; /// last ID + 1
 Skill get(const ulong id) {
     switch (id) {
-        case 0: return Skill("Simple Hand Attack", 1);
+        case 0: return simpleHandAttack;
         break;
-        case 1: return Skill("Simple Spell Attack", 1);
+        case 1: return simpleHandAttack;
         break;
     }
 }
 
+void simpleAttackInitializator() {
+    simpleHandAttack.open();
+    simpleSpellAttack.open();
+}
+
+auto simpleHandAttack = Skill("Simple Hand Attack","sha",1);
+auto simpleSpellAttack = Skill("Simple Spell Attack","ssa",1);
 
 
 
