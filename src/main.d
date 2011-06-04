@@ -53,7 +53,7 @@ int main(char[][] args)
 
     writeln();
 
-    printHeroInfo();
+    hero.hero.printInfo();
 
     for (;;) {
         string command = "Unique command";

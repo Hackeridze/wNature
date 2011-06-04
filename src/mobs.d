@@ -30,28 +30,43 @@ import random;
 import map;
 import hero;
 import std.stdio;
+static import skills;
 
 struct Mob {
     string name;
     uint health;
-    int healthNow;
+    long healthNow;
     uint attackPower;
     uint spellPower;
     ulong id;
     string habitat; /// Can be bank jungle mountains plain desert water shoal forest
     //string weapon; /// Can be tusks fangs
+    //bool dead = false; /// For killing)
+    bool bellicosity;
 
+    /// Check death mob or not
+    bool death() {
+        if (this.healthNow > 0) return false;
+        else return true;
+    }
+    void takingDamage(int how) {
+        this.healthNow -= how;
+    }
     /// Returns current damage
     uint damage() {
         if (randomInt(10) == 1) {
             writeln(this.name," mised!");
             return 0;
         } else {
-            write(this.name," deals ",this.attackPower," damage!");
+            write(' ',this.name," deals ",this.attackPower," damage!");
             return this.attackPower;
         }
     }
 
+    /// Taking damage from mob 'fromMob'
+    void takingDamage(long how) {
+        this.healthNow -= how;
+    }
     /// Returns the rating
     float rating() {
         float rating = (((health*2)*38)/75 + ((attackPower + spellPower)*67)/81);
@@ -60,7 +75,7 @@ struct Mob {
     }
 
     this(string name, uint health, uint attackPower,
-                uint spellPower, string habitat, ulong id/*, string weapon*/) {
+                uint spellPower, string habitat, ulong id/*, string weapon*/, bool bellicosity) {
         this.name = name;
         this.health = health;
         this.attackPower = attackPower;
@@ -69,37 +84,35 @@ struct Mob {
         this.habitat = habitat;
         this.healthNow = this.health;
         //this.weapon = weapon;
+        this.bellicosity = bellicosity;
     }
 }
+
+
 
 ulong[] generateMobs() {
 
     ushort counter = 0;
-    auto suitableByLocality = new ulong[1];
-    auto suitable = new ulong[1];
+
+    auto suitable = new ulong[0];
 
     for(ulong id = 0; id < NUMBER_OF_MOBS; ++id) {
 
         Mob bufferMob = get(id);
 
-        if ( bufferMob.habitat == heroLocalityType() ) {
-            suitableByLocality ~= id;
+        if ( bufferMob.habitat == hero.hero.heroLocalityType() && ((bufferMob.rating() <= hero.hero.rating())) ) {
+            suitable ~= id;
             counter++;
         }
 
     }
 
-    counter = 0;
-
-    for(ulong t = 0; t < suitableByLocality.length; ++t) {
-        Mob bufferMob = get(suitableByLocality[t]);
-        if ( bufferMob.rating() <= hero.hero.rating() ) {
-            suitable ~= suitableByLocality[t];
-        }
-    }
     auto ret = suitable;
-    suitable.length = 1;
-    suitable = null;
+
+    suitable.length = 0; /// Im
+    suitable = null;     /// FUCKIN'
+    delete suitable;     /// DESTROY YOU!!!!
+
     return ret;
 }
 
@@ -140,8 +153,9 @@ static Mob boar() {
     ulong id = 0; /// ID
     string habitat = "forest"; /// Habitat, may be bank jungle mountains plain desert water shoal forest
     //string weapon = "tusks";
+    bool bellicosity = true;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
@@ -153,8 +167,9 @@ static Mob wolf() {
     ulong id = 1;
     string habitat = "forest";
     //string weapon = "fangs";
+    bool bellicosity = true;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
@@ -165,8 +180,9 @@ static Mob bear() {
     uint spellPower = 0;
     ulong id = 2;
     string habitat = "forest";
+    bool bellicosity = true;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
@@ -177,8 +193,9 @@ static Mob crocodile() {
     uint spellPower = 0;
     ulong id = 3;
     string habitat = "shoal";
+    bool bellicosity = true;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
@@ -189,8 +206,9 @@ static Mob rat() {
     uint spellPower = 0;
     ulong id = 4;
     string habitat = "plain";
+    bool bellicosity = false;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
@@ -201,8 +219,9 @@ static Mob tiger() {
     uint spellPower = 0;
     ulong id = 5;
     string habitat = "plain";
+    bool bellicosity = true;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
@@ -213,8 +232,9 @@ static Mob spider() {
     uint spellPower = 0;
     ulong id = 6;
     string habitat = "forest";
+    bool bellicosity = false;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
@@ -225,32 +245,35 @@ static Mob elephant() {
     uint spellPower = 0;
     ulong id = 7;
     string habitat = "plain";
+    bool bellicosity = false;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
 static Mob wolverine() {
     string name = "Wolverine";
     uint health = 7 + randomInt(3);
-    uint attackPower = 11;
+    uint attackPower = 1;
     uint spellPower = 0;
     ulong id = 8;
     string habitat = "jungle";
+    bool bellicosity = true;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 
 static Mob crucian() {
     string name = "Crucian";
     uint health = 0 + randomInt(2);
-    uint attackPower = 1;
+    uint attackPower = 11;
     uint spellPower = 0;
     ulong id = 9;
-    string habitat = "bank";
+    string habitat = "shoal";
+    bool bellicosity = false;
 
-    auto mob = Mob(name, health, attackPower, spellPower, habitat, id);
+    auto mob = Mob(name, health, attackPower, spellPower, habitat, id, bellicosity);
     return mob;
 }
 

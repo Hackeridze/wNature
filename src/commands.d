@@ -52,7 +52,7 @@ bool processCommand(string command) {
     else if (command == "go e\n") heroGoTo("right");
     else if (command == "go w\n") heroGoTo("left");
 
-    else if (command == "info\n") printHeroInfo();
+    else if (command == "info\n") hero.hero.printInfo();
 
     else if (command == "help\n") printCommands();
 
@@ -94,7 +94,7 @@ string processBattleCommand(string command) {
 
     //else if (command == "map\n") printMapPart();
 
-    else if (command == "info\n") printHeroInfo();
+    else if (command == "info\n") hero.hero.printInfo();
 
     else if (command == "help\n") printBattleCommands();
 

@@ -27,6 +27,7 @@
 module hero;
 
 import std.stdio;
+import std.process;
 
 public import map;
 import random;
@@ -35,7 +36,8 @@ import handlers;
 import mobs;
 static import skills;
 
-static char[11] PlayerNickName = '\n'; /// Player's nickname, 10 chars maximum long
+
+static char[16] PlayerNickName = ' '; /// Player's nickname, 10 chars maximum long
 immutable STD_HEALTH = 20; /// Standart health
 immutable STD_MANA = 20; /// Standart mana
 immutable STD_SPELL_POWER = 2; /// Have always done a multiple of two
@@ -61,42 +63,103 @@ struct Coord {
 * Hero
 */
 struct Hero {
-    char[16] name; /// Name
-    uint health; /// Health, maximum
-    int healthNow; /// Health, now
-    uint mana; /// Mana, maximum
-    int manaNow; /// Mana, now
-    uint attackPower; /// Attack power
-    uint spellPower; /// Spell power
+    char[16] name;               /// Name
+    ulong health;               /// Health, maximum
+    long healthNow;            /// Health, now
+    ulong mana;               /// Mana, maximum
+    long manaNow;            /// Mana, now
+    uint attackPower;       /// Attack power
+    uint spellPower;       /// Spell power
     uint damageReduction; /// Damage reduction
-    uint fortune; /// Fortune
-    uint critStrikeRate; /// Critical strike rating
+    uint fortune;        /// Fortune
+    uint critStrikeRate;/// Critical strike rating
 
-    uint armor = 0; /// Armor
+    uint armor = 0;   /// Armor
 
-    uint[32] inventory; /// Inventory
+    uint[32] inventory; /// Inventory(
 
     Coord coord = START_COORD; /// Initialize hero coords by START_COORDS
 
     /// Using skills)
-    void useSkills() {
+    int useSkills() {
+        string command ="43235dsf235";
+        while (command != "43235235") {
+            writeln(FLASH, "\n Type \"skills\" to print avaliable skills\n",
+                            "\tWhat skill use?", RED);
+                            write("\r >", RED);
+            stdin.readln(command);
+            write(DEFAULT, "\r\n", command);
+            for(int t = 0; t < skills.get.length; ++t) {
+                if (command == "skills\n") {
+                    this.printAvaliableSkills();
+                    break;
+                }
+                else if ((skills.get[t].command) == command) {
+                    return this.genDamage(t);
+                    break;
+                } else continue;
+            }
+        }
+        return 0;
+    }
+    /// Prints avaliable skils for hero
+    void printAvaliableSkills(){
+        writeln(RED,"\tSkills that you can youse:
+                     [command] -- [name]",DEFAULT);
 
+        for(uint t; t < skills.get.length; ++t){
+            if (skills.get[t].opened == false) continue;
+            else write(LIGHTRED,'\t',skills.get[t].name," -- ",skills.get[t].command,DEFAULT);
+        }
+    }
+    /// Generate and returns damage from skill
+    int genDamage(uint skill_ID) {
+        auto skll = skills.get[skill_ID];
+        if (skll.forMage == true) return (skll.damage * spellPower);
+        else {
+            return (skll.damage * attackPower);
+        }
+    }
+
+    /// Returns type of locality where hero is now
+    string heroLocalityType() {
+        return map.worldMap[hero.coord.y][hero.coord.x].localityType;
+    }
+
+    /// Printing current info about the hero
+    void printInfo() {
+        shell("clear"); /// Clean the screen
+
+        printMapMini();
+        write(PURPLE);
+        write("\033[9A");
+        write(" Name: ", this.name, "\r\n");
+        write(" Health: ", this.healthNow,'\\', this.health, "\r\n");
+        write(" Mana: ", this.manaNow,'\\', this.mana, "\r\n");
+        write(" Coords: [", this.coord.x,';', this.coord.y, "]\r\n");
+        write(" Locality type: ", heroLocalityType(), "\r\n");
+        write(" Attack power: ", this.attackPower, "\r\n");
+        write(" Spell power: ", this.spellPower, "\r\n");
+        write("\033[2B");
+        write(DEFAULT);
     }
     /// Cause death immidiatly
     void dieNow() {
         this.healthNow = 0;
-        this.dieCheck();
+        this.death();
     }
     /// Cheсk do hero die or not
-    void dieCheck() {
-        if (this.healthNow <= 0) {
+    bool death() {
+        if (this.healthNow > 0) return false;
+        else {
             writeln("You die... Rest in ",heroLocalityType());
+            return true;
         }
     }
     /// Taking damage from mob 'fromMob'
     void takingDamage(Mob fromMob) {
         this.healthNow -= fromMob.damage();
-        this.dieCheck();
+        this.death();
     }
     /// Returns rating. Doesn't it?
     float rating() {
@@ -115,7 +178,7 @@ struct Hero {
             printWarningEdjeOfMap();
             return false;
         }
-        coordHandler();
+        coordHandler(this);
         return true;
     }
     /// Down  going func
@@ -125,7 +188,7 @@ struct Hero {
             printWarningEdjeOfMap();
             return false;
         }
-        coordHandler();
+        coordHandler(this);
         return true;
     }
     /// Left going func
@@ -135,7 +198,7 @@ struct Hero {
             printWarningEdjeOfMap();
             return false;
         }
-        coordHandler();
+        coordHandler(this);
         return true;
     }
     /// Right going func
@@ -145,11 +208,11 @@ struct Hero {
             printWarningEdjeOfMap();
             return false;
         }
-        coordHandler();
+        coordHandler(this);
         return true;
     }
     /// Constructor
-    this(char[11] name, uint health, uint mana,
+    this(char[16] name, ulong health, ulong mana,
                 uint attackPower, uint spellPower,
                 uint damageReduction, uint fortune,
                 uint critStrikeRate) {
@@ -171,28 +234,6 @@ struct Hero {
 
 Hero hero; /// Making new hero
 
-/// Printing current info about the hero
-void printHeroInfo() {
-
-    std.c.stdlib.system("clear"); /// Clean the screen
-
-    printMapMini();
-    write(PURPLE);
-    write("\033[9A");
-    write(" Name: ", hero.name, "\r\n");
-    write(" Health: ", hero.healthNow,'\\', hero.health, "\r\n");
-    write(" Mana: ", hero.manaNow,'\\', hero.mana, "\r\n");
-    write(" Coords: [", hero.coord.x,';', hero.coord.y, "]\r\n");
-    write(" Locality type: ", heroLocalityType(), "\r\n");
-    write(" Attack power: ", hero.attackPower, "\r\n");
-    write(" Spell power: ", hero.spellPower, "\r\n");
-    write("\033[2B");
-    write(DEFAULT);
-}
-/// Returns type of locality where hero is now
-string heroLocalityType() {
-    return map.worldMap[hero.coord.y][hero.coord.x].localityType;
-}
 
 /// Allows long-walks
 void heroGoTo(string to) {

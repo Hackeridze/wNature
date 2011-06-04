@@ -39,21 +39,25 @@ import std.process;
 /**
 * Hero's coords handler, makes battles, opening territories etc.
 */
-void coordHandler() {
+void coordHandler(Hero player) {
 
     exploration();
 
-    auto suitable = generateMobs();
+    auto suitable = generateMobs(); /// Mobs here, suitable for this locality and hero's rating
 
     for(int t = 0; t < suitable.length; ++t) {
-        if (randomInt(3) == 1){}
+
+        auto attacker = get(suitable[t]);
+
+        if ((randomInt(3) == 1) || (attacker.bellicosity == false)) continue;
         else {
-            printHeroInfo();
-            auto attacker = get(suitable[t]);
-            auto battleResult = battle( attacker );
+            player.printInfo();
+
+            auto battleResult = battle(attacker, player);
+
             if      (battleResult == "try to escape") {
                 switch (randomInt(15)) {
-                    case 1: hero.hero.dieNow();
+                    case 1: player.dieNow();
                     break;
                     case 2:
                     case 3:
@@ -65,7 +69,7 @@ void coordHandler() {
                     case 9:
                     case 10:
                     case 11:
-                    case 12: hero.hero.takingDamage( attacker );
+                    case 12: player.takingDamage( attacker );
                              writeln(" You managed to escape from the ",attacker.name,'!');
                     break;
                     case 13:
@@ -74,7 +78,11 @@ void coordHandler() {
                              writeln( " You managed to escape from the ",attacker.name,'!');
                     break;
                 }
-            }//else if()
+            }
+            else if(battleResult == "herowin")
+                    writeln("\n You win ",attacker.name,"!");
+            //else if(battleResult == "mobwin")
+               //     writeln("\n You win ",atacker.name,"!");
         }
     }
 }
@@ -82,12 +90,12 @@ void coordHandler() {
 /**
 * Battle-func
 */
-string battle(Mob withMob) {
+string battle(Mob withMob, Hero player) {
     writeln('\n',withMob.name," attack you!\n\r\tWhat shall we do?");
 
-    for (;;) {
-        string command = "Unique command";
 
+    string command = "Unique command";
+    for (;;) {
         write("\r >", RED);
         stdin.readln(command);
         write(DEFAULT, "\r");
@@ -96,9 +104,15 @@ string battle(Mob withMob) {
 
         if (processingAnswer == "false") return "try to escape";
         else if (processingAnswer
-                    == "let the battle begin") hero.hero.useSkills();
+                        == "let the battle begin")
+            while (withMob.death() == false && player.death() == false) {
+                player.takingDamage( withMob );
+                withMob.takingDamage(player.useSkills());
+                writeln(withMob.healthNow);
+            }
     }
-
+    if (withMob.death() == true) return "herowin";
+    else return "mobwin";
 }
 
 

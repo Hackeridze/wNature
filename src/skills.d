@@ -30,39 +30,34 @@ struct Skill{
     string name;
     string command;
     ushort damage;
+    bool forMage;
+
     bool opened = false;
 
     void open(){
         this.opened = true;
     }
 
-    this(string name, string command, ushort damage){
+    this(string name, string command, ushort damage, bool forMage){
         this.name = name;
         this.damage = damage;
         this.command = command;
+        this.forMage = forMage;
     }
 }
 
-immutable NUMBER_OF_SKILLS = 2; /// last ID + 1
-Skill get(const ulong id) {
-    switch (id) {
-        case 0: return simpleHandAttack;
-        break;
-        case 1: return simpleHandAttack;
-        break;
-    }
-}
+///immutable NUMBER_OF_SKILLS = 2; /// last ID + 1
+
+
+Skill[] get = [
+               Skill("Simple Hand Attack","sha\n",1,false),
+               Skill("Simple Spell Attack","ssa\n",1,true)
+               ];
 
 void simpleAttackInitializator() {
-    simpleHandAttack.open();
-    simpleSpellAttack.open();
+    get[0].open();
+    get[1].open();
 }
-
-auto simpleHandAttack = Skill("Simple Hand Attack","sha",1);
-auto simpleSpellAttack = Skill("Simple Spell Attack","ssa",1);
-
-
-
 
 
 
